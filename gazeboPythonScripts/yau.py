@@ -9,14 +9,8 @@ from cv_bridge import CvBridge, CvBridgeError
 from threading import Thread
 from time import sleep
 from gazebo_msgs.msg import ModelState
+from gazebo_msgs.msg import ModelStates
 import socket
-
-UDP_IP = "127.0.0.1"
-UDP_PORT = 4444
-
-sock = socket.socket(socket.AF_INET, # Internet
-                     socket.SOCK_DGRAM) # UDP
-sock.bind((UDP_IP, UDP_PORT))
 
 class image_feature:
 
@@ -29,8 +23,6 @@ class image_feature:
 
 
     def callback(self, ros_data):
-        data, addr = sock.recvfrom(1024)
-        print(data)
 
         cv_image = self.bridge.imgmsg_to_cv2(ros_data, "bgr8")
         gray = cv2.cvtColor(cv_image, cv2.COLOR_BGR2GRAY)
@@ -69,15 +61,42 @@ class image_feature:
             self.pub_modelstate.publish(modelState)
             self.currentPosition = self.currentPosition + 1
 
+class PositionSubscriber:
+
+    def subscribe_position(self):
+        # self.subscriber = rospy.Subscriber("/gazebo/model_states", ModelStates, self.callback,  queue_size = 1)
+        pos = rospy.wait_for_message("/gazebo/model_states", ModelStates)
+        return pos
+
+    # def callback(self, ros_data):
+    #     print(ros_data)
 
 def main(args):
     rospy.init_node('gazebo', anonymous=True)
-    ic = image_feature()
+    pub_modelstate = rospy.Publisher( '/gazebo/set_model_state', ModelState, queue_size=10)
+    ps = PositionSubscriber()
+    
+    
+    while True:
+        pos = ps.subscribe_position()
+        yau = pos.pose[1].position.x
+        tanker = pos.pose[2].position.x
+        diff = tanker - yau
+        print(diff)
+        if diff > 5:
+            modelState = ModelState()
+            modelState.model_name = 'yau'
+            modelState.pose.position.x = yau + 0.1
+            modelState.pose.position.y = 0
+            modelState.pose.position.z = 7
+            pub_modelstate.publish(modelState)
+        #else:
+            #ic = image_feature()
+            
     try:
         rospy.spin()
     except KeyboardInterrupt:
         print("Shutting down vison node.")
-
     
 if __name__ == '__main__':
     main(sys.argv)
