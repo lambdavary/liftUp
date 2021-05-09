@@ -10,6 +10,7 @@ from threading import Thread
 from time import sleep
 from gazebo_msgs.msg import ModelState
 from gazebo_msgs.msg import ModelStates
+from tf.transformations import euler_from_quaternion, quaternion_from_euler
 import socket
 
 class image_feature:
@@ -79,17 +80,49 @@ def main(args):
     
     while True:
         pos = ps.subscribe_position()
-        yau = pos.pose[1].position.x
-        tanker = pos.pose[2].position.x
-        diff = tanker - yau
-        print(diff)
-        if diff > 5:
-            modelState = ModelState()
+        yauPosition = pos.pose[1].position
+        tankerPosition = pos.pose[2].position
+        diffX = tankerPosition.x - yauPosition.x
+        diffY = tankerPosition.y - yauPosition.y
+        diffZ = tankerPosition.z - yauPosition.z
+
+        if diffX > 5:
+	    
+            while diffY > 0.3 or diffY < -0.3:
+                k = 0.1
+                if diffY > 0:
+                    k = -k
+		modelState = ModelState()
+                modelState.model_name = 'yau'
+                quaternion = quaternion_from_euler(k, 0, 0)
+		yauPosition.x = yauPosition.x + 0.01
+		yauPosition.y = yauPosition.y - k
+		yauPosition.z = yauPosition.z - 0.05
+		modelState.pose.position.x = yauPosition.x + 0.1
+                modelState.pose.position.y = yauPosition.y
+                modelState.pose.position.z = 6
+                modelState.pose.orientation.x = quaternion[0]
+                modelState.pose.orientation.y = quaternion[1]
+                modelState.pose.orientation.z = quaternion[2]
+                modelState.pose.orientation.w = quaternion[3]
+		pub_modelstate.publish(modelState)
+		diffY = tankerPosition.y - yauPosition.y
+		print(diffY)
+
+	    modelState = ModelState()
             modelState.model_name = 'yau'
-            modelState.pose.position.x = yau + 0.1
-            modelState.pose.position.y = 0
-            modelState.pose.position.z = 7
-            pub_modelstate.publish(modelState)
+            modelState.pose.position.x = yauPosition.x + 0.1
+	    quaternion = quaternion_from_euler(0, 0, 0)
+	    modelState.pose.position.y = yauPosition.y
+            modelState.pose.position.z = 6
+            modelState.pose.orientation.x = quaternion[0]
+            modelState.pose.orientation.y = quaternion[1]
+            modelState.pose.orientation.z = quaternion[2]
+            modelState.pose.orientation.w = quaternion[3]
+   	    pub_modelstate.publish(modelState)
+
+
+
         #else:
             #ic = image_feature()
             

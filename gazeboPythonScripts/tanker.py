@@ -24,8 +24,8 @@ while True:
     modelState = ModelState()
     modelState.model_name = 'tanker'
     modelState.pose.position.x = 10+i/5000
-    modelState.pose.position.y = 0
-    modelState.pose.position.z = 8
+    modelState.pose.position.y = 1
+    modelState.pose.position.z = 6
     # modelState.pose.orientation.x = quaternion[0]
     # modelState.pose.orientation.y = quaternion[1]
     # modelState.pose.orientation.z = quaternion[2]
