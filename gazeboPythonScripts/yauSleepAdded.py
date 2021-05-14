@@ -101,7 +101,7 @@ def main(args):
 		yauPosition.x = yauPosition.x + 0.01
 		yauPosition.y = yauPosition.y - k
 		yauPosition.z = yauPosition.z - 0.05
-		modelState.pose.position.x = yauPosition.x + 0.1
+		modelState.pose.position.x = yauPosition.x + 0.3
                 modelState.pose.position.y = yauPosition.y
                 modelState.pose.position.z = 2
                 modelState.pose.orientation.x = quaternion[0]
@@ -110,6 +110,7 @@ def main(args):
                 modelState.pose.orientation.w = quaternion[3]
 		pub_modelstate.publish(modelState)
 		diffY = tankerPosition.y - yauPosition.y
+		sleep(0.1)
 		print(diffY)
 
 	    modelState = ModelState()
