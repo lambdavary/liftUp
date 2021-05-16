@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <sdf version='1.6'>
-  <model name='tanker'>
-    <link name='tanker/base_link'>
+  <model name='yau'>
+    <link name='cessna_0/base_link'>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>-0.00391 0 0.09273 0 -0 0</pose>
@@ -19,39 +19,52 @@
       <velocity_decay/>
       <gravity>0</gravity>
       <velocity_decay/>
+      <sensor name='cessna_0/camera' type='camera'>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>1</visualize>
+        <camera name='__default__'>
+          <horizontal_fov>1.18647</horizontal_fov>
+          <image>
+            <format>R8G8B8</format>
+            <width>640</width>
+            <height>480</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100000</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+        </camera>
+        <plugin name='cessna_0_camera' filename='libgazebo_ros_camera.so'>
+          <robotNamespace>cessna_0</robotNamespace>
+          <alwaysOn>1</alwaysOn>
+          <updateRate>30</updateRate>
+          <cameraName>camera</cameraName>
+          <imageTopicName>/camera/image_raw</imageTopicName>
+          <cameraInfoTopicName>/camera/camera_info</cameraInfoTopicName>
+          <frameName>camera</frameName>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+        </plugin>
+        <pose frame=''>0.179 0 0.0855 0 -0 0</pose>
+      </sensor>
       <self_collide>0</self_collide>
       <enable_wind>0</enable_wind>
       <kinematic>0</kinematic>
-      <visual name='ModelPreview_4::tanker/base_link::visual_2'>
-        <pose frame=''>-0.58 0.92 -0.4 0 1.57 0</pose>
-        <geometry>
-          <cylinder>
-            <radius>0.5</radius>
-            <length>0.1</length>
-          </cylinder>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Green</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-          <shader type='pixel'>
-            <normal_map>__default__</normal_map>
-          </shader>
-          <ambient>0 0 0 1</ambient>
-          <diffuse>0 0 0 1</diffuse>
-          <specular>0 0 0 1</specular>
-          <emissive>0 0 0 1</emissive>
-        </material>
-        <transparency>0</transparency>
-        <cast_shadows>1</cast_shadows>
-      </visual>
-      <visual name='tanker/base_link_visual'>
+      <visual name='cessna_0/base_link_visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
             <scale>0.1 0.1 0.1</scale>
-            <uri>/home/lambdavary/ardupilot_sim/agents/tanker/meshes/body.dae</uri>
+            <uri>/home/lambdavary/ardupilot_sim/agents/cessna/meshes/body.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -70,31 +83,7 @@
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
       </visual>
-      <visual name='ModelPreview_1::tanker/base_link::visual_1'>
-        <pose frame=''>-0.33 0.5 -0.15 2.74159 1.13159 -1.57159</pose>
-        <geometry>
-          <cylinder>
-            <radius>0.02</radius>
-            <length>1.21</length>
-          </cylinder>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Green</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-          <shader type='pixel'>
-            <normal_map>__default__</normal_map>
-          </shader>
-          <ambient>0 1 0 1</ambient>
-          <diffuse>0 1 0 1</diffuse>
-          <specular>0.1 0.1 0.1 1</specular>
-          <emissive>0 0 0 1</emissive>
-        </material>
-        <transparency>0</transparency>
-        <cast_shadows>1</cast_shadows>
-      </visual>
-      <collision name='tanker/base_link_collision'>
+      <collision name='cessna_0/base_link_collision'>
         <laser_retro>0</laser_retro>
         <max_contacts>10</max_contacts>
         <pose frame=''>0 0 0 0 -0 0</pose>
@@ -150,8 +139,9 @@
         </surface>
       </collision>
     </link>
-    <link name='tanker/elevators'>
+    <link name='cessna_0/elevators'>
       <pose frame=''>-0.555 0 0.057 0 -0 0</pose>
+      <gravity>0</gravity>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>0.0001</mass>
@@ -166,14 +156,13 @@
       </inertial>
       <self_collide>0</self_collide>
       <enable_wind>0</enable_wind>
-      <gravity>0</gravity>
       <kinematic>0</kinematic>
-      <visual name='tanker/elevators_visual'>
+      <visual name='cessna_0/elevators_visual'>
         <pose frame=''>0.555 0 -0.057 0 -0 0</pose>
         <geometry>
           <mesh>
             <scale>0.1 0.1 0.1</scale>
-            <uri>/home/lambdavary/ardupilot_sim/agents/tanker/meshes/elevators.dae</uri>
+            <uri>/home/lambdavary/ardupilot_sim/agents/cessna/meshes/elevators.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -183,7 +172,7 @@
         <cast_shadows>1</cast_shadows>
       </visual>
     </link>
-    <link name='tanker/imu_link'>
+    <link name='cessna_0/imu_link'>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
@@ -209,8 +198,9 @@
       <enable_wind>0</enable_wind>
       <kinematic>0</kinematic>
     </link>
-    <link name='tanker/left_aileron'>
+    <link name='cessna_0/left_aileron'>
       <pose frame=''>-0.145 0.37 0.15 0.05 -0 -0.12</pose>
+      <gravity>0</gravity>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>0.0001</mass>
@@ -225,14 +215,13 @@
       </inertial>
       <self_collide>0</self_collide>
       <enable_wind>0</enable_wind>
-      <gravity>0</gravity>
       <kinematic>0</kinematic>
-      <visual name='tanker/left_aileron_visual'>
+      <visual name='cessna_0/left_aileron_visual'>
         <pose frame=''>0.195 -0.36 -0.12 -0.05 -0 0.12</pose>
         <geometry>
           <mesh>
             <scale>0.1 0.1 0.1</scale>
-            <uri>/home/lambdavary/ardupilot_sim/agents/tanker/meshes/left_aileron.dae</uri>
+            <uri>/home/lambdavary/ardupilot_sim/agents/cessna/meshes/left_aileron.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -242,8 +231,8 @@
         <cast_shadows>1</cast_shadows>
       </visual>
     </link>
-    <link name='tanker/propeller'>
-      <pose frame=''>0.179 -0 0.0855 0 -0 0</pose>
+    <link name='cessna_0/propeller'>
+      <pose frame=''>0.179 0 0.0855 0 -0 0</pose>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>0.025</mass>
@@ -261,12 +250,12 @@
       <self_collide>0</self_collide>
       <enable_wind>0</enable_wind>
       <kinematic>0</kinematic>
-      <visual name='tanker/propeller_visual'>
+      <visual name='cessna_0/propeller_visual'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
             <scale>0.1 0.1 0.1</scale>
-            <uri>/home/lambdavary/ardupilot_sim/agents/tanker/meshes/tanker_prop.dae</uri>
+            <uri>/home/lambdavary/ardupilot_sim/agents/cessna/meshes/cessna_prop.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -280,8 +269,9 @@
         <cast_shadows>1</cast_shadows>
       </visual>
     </link>
-    <link name='tanker/right_aileron'>
+    <link name='cessna_0/right_aileron'>
       <pose frame=''>-0.145 -0.37 0.15 -0.05 -0 0.12</pose>
+      <gravity>0</gravity>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>0.0001</mass>
@@ -296,22 +286,22 @@
       </inertial>
       <self_collide>0</self_collide>
       <enable_wind>0</enable_wind>
-      <gravity>0</gravity>
       <kinematic>0</kinematic>
-      <visual name='tanker/right_aileron_visual'>
+      <visual name='cessna_0/right_aileron_visual'>
         <pose frame=''>0.195 0.36 -0.12 0.05 -0 -0.12</pose>
         <geometry>
           <mesh>
             <scale>0.1 0.1 0.1</scale>
-            <uri>/home/lambdavary/ardupilot_sims/agents/tanker/meshes/right_aileron.dae</uri>
+            <uri>/home/lambdavary/ardupilot_sims/agents/cessna/meshes/right_aileron.dae</uri>
           </mesh>
         </geometry>
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
       </visual>
     </link>
-    <link name='tanker/rudder'>
+    <link name='cessna_0/rudder'>
       <pose frame=''>-0.51 0 0.325 0 -0.35 0</pose>
+      <gravity>0</gravity>
       <inertial>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <mass>0.0001</mass>
@@ -326,14 +316,13 @@
       </inertial>
       <self_collide>0</self_collide>
       <enable_wind>0</enable_wind>
-      <gravity>0</gravity>
       <kinematic>0</kinematic>
-      <visual name='tanker/rudder_visual'>
+      <visual name='cessna_0/rudder_visual'>
         <pose frame=''>0.36 0 -0.475 0 0.35 0</pose>
         <geometry>
           <mesh>
             <scale>0.1 0.1 0.1</scale>
-            <uri>/home/lambdavary/ardupilot_sim/agents/tanker/meshes/rudder.dae</uri>
+            <uri>/home/lambdavary/ardupilot_sim/agents/cessna/meshes/rudder.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -343,9 +332,9 @@
         <cast_shadows>1</cast_shadows>
       </visual>
     </link>
-    <joint name='tanker/elevators_joint' type='revolute'>
-      <parent>tanker/base_link</parent>
-      <child>tanker/elevators</child>
+    <joint name='cessna_0/elevators_joint' type='revolute'>
+      <parent>cessna_0/base_link</parent>
+      <child>cessna_0/elevators</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>0 1 0</xyz>
@@ -376,9 +365,9 @@
         </ode>
       </physics>
     </joint>
-    <joint name='tanker/imu_joint' type='revolute'>
-      <parent>tanker/base_link</parent>
-      <child>tanker/imu_link</child>
+    <joint name='cessna_0/imu_joint' type='revolute'>
+      <parent>cessna_0/base_link</parent>
+      <child>cessna_0/imu_link</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>1 0 0</xyz>
@@ -409,9 +398,9 @@
         </ode>
       </physics>
     </joint>
-    <joint name='tanker/left_aileron_joint' type='revolute'>
-      <parent>tanker/base_link</parent>
-      <child>tanker/left_aileron</child>
+    <joint name='cessna_0/left_aileron_joint' type='revolute'>
+      <parent>cessna_0/base_link</parent>
+      <child>cessna_0/left_aileron</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>0.119563 0.991568 0.049979</xyz>
@@ -442,9 +431,9 @@
         </ode>
       </physics>
     </joint>
-    <joint name='tanker/propeller_joint' type='revolute'>
-      <parent>tanker/base_link</parent>
-      <child>tanker/propeller</child>
+    <joint name='cessna_0/propeller_joint' type='revolute'>
+      <parent>cessna_0/base_link</parent>
+      <child>cessna_0/propeller</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>1 0 0</xyz>
@@ -475,9 +464,9 @@
         </ode>
       </physics>
     </joint>
-    <joint name='tanker/right_aileron_joint' type='revolute'>
-      <parent>tanker/base_link</parent>
-      <child>tanker/right_aileron</child>
+    <joint name='cessna_0/right_aileron_joint' type='revolute'>
+      <parent>cessna_0/base_link</parent>
+      <child>cessna_0/right_aileron</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>-0.119563 0.991568 -0.049979</xyz>
@@ -508,9 +497,9 @@
         </ode>
       </physics>
     </joint>
-    <joint name='tanker/rudder_joint' type='revolute'>
-      <parent>tanker/base_link</parent>
-      <child>tanker/rudder</child>
+    <joint name='cessna_0/rudder_joint' type='revolute'>
+      <parent>cessna_0/base_link</parent>
+      <child>cessna_0/rudder</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>-0.342898 0 0.939373</xyz>
@@ -543,10 +532,90 @@
     </joint>
     <static>0</static>
     <allow_auto_disable>1</allow_auto_disable>
+    <plugin name='cessna_0_arduplane_plugin' filename='libArduPilotPlugin.so'>
+      <fdm_addr>127.0.0.1</fdm_addr>
+      <fdm_port_in>9002</fdm_port_in>
+      <fdm_port_out>9003</fdm_port_out>
+      <modelXYZToAirplaneXForwardZDown>0 0 0 0 0 0</modelXYZToAirplaneXForwardZDown>
+      <gazeboXYZToNED>0 0 0 3.141593 0 1.57079</gazeboXYZToNED>
+      <imuName>cessna_0/imu_link::imu_sensor</imuName>
+      <connectionTimeoutMaxCount>5</connectionTimeoutMaxCount>
+      <control channel='2'>
+        <type>VELOCITY</type>
+        <offset>0</offset>
+        <p_gain>.1</p_gain>
+        <i_gain>0</i_gain>
+        <d_gain>0</d_gain>
+        <i_max>0</i_max>
+        <i_min>0</i_min>
+        <cmd_max>2.5</cmd_max>
+        <cmd_min>0</cmd_min>
+        <jointName>cessna_0/propeller_joint</jointName>
+        <multiplier>838</multiplier>
+        <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
+      </control>
+      <control channel='0'>
+        <type>POSITION</type>
+        <offset>-0.5</offset>
+        <p_gain>2.00</p_gain>
+        <i_gain>0</i_gain>
+        <d_gain>1.50</d_gain>
+        <i_max>0</i_max>
+        <i_min>0</i_min>
+        <cmd_max>1.0</cmd_max>
+        <cmd_min>-1.0</cmd_min>
+        <multiplier>-1</multiplier>
+        <jointName>cessna_0/left_aileron_joint</jointName>
+        <controlVelocitySlowdownSim>1</controlVelocitySlowdownSim>
+      </control>
+      <control channel='0'>
+        <type>POSITION</type>
+        <offset>-0.5</offset>
+        <p_gain>2.00</p_gain>
+        <i_gain>0</i_gain>
+        <d_gain>1.50</d_gain>
+        <i_max>0</i_max>
+        <i_min>0</i_min>
+        <cmd_max>1.0</cmd_max>
+        <cmd_min>-1.0</cmd_min>
+        <multiplier>1</multiplier>
+        <jointName>cessna_0/right_aileron_joint</jointName>
+        <controlVelocitySlowdownSim>1</controlVelocitySlowdownSim>
+      </control>
+      <control channel='1'>
+        <type>POSITION</type>
+        <offset>-0.5</offset>
+        <p_gain>2.00</p_gain>
+        <i_gain>0</i_gain>
+        <d_gain>1.50</d_gain>
+        <i_max>0</i_max>
+        <i_min>0</i_min>
+        <cmd_max>1.0</cmd_max>
+        <cmd_min>-1.0</cmd_min>
+        <multiplier>1</multiplier>
+        <jointName>cessna_0/elevators_joint</jointName>
+        <controlVelocitySlowdownSim>1</controlVelocitySlowdownSim>
+      </control>
+      <control channel='3'>
+        <type>POSITION</type>
+        <offset>-0.5</offset>
+        <p_gain>2.00</p_gain>
+        <i_gain>0</i_gain>
+        <d_gain>1.50</d_gain>
+        <i_max>0</i_max>
+        <i_min>0</i_min>
+        <cmd_max>1.0</cmd_max>
+        <cmd_min>-1.0</cmd_min>
+        <multiplier>1</multiplier>
+        <jointName>cessna_0/rudder_joint</jointName>
+        <controlVelocitySlowdownSim>1</controlVelocitySlowdownSim>
+      </control>
+      <robotNamespace>/</robotNamespace>
+    </plugin>
     <plugin name='elevators_plugin' filename='libLiftDragPlugin.so'>
       <forward>1 0 0</forward>
-      <link_name>tanker/base_link</link_name>
-      <control_joint_name>tanker/elevators_joint</control_joint_name>
+      <link_name>cessna_0/base_link</link_name>
+      <control_joint_name>cessna_0/elevators_joint</control_joint_name>
       <robotNamespace>/</robotNamespace>
     </plugin>
     <plugin name='left_aileron_plugin' filename='libLiftDragPlugin.so'>
@@ -563,8 +632,8 @@
       <upward>0 0 1</upward>
       <control_joint_rad_to_cl>-2.0</control_joint_rad_to_cl>
       <forward>1 0 0</forward>
-      <link_name>tanker/base_link</link_name>
-      <control_joint_name>tanker/left_aileron_joint</control_joint_name>
+      <link_name>cessna_0/base_link</link_name>
+      <control_joint_name>cessna_0/left_aileron_joint</control_joint_name>
       <robotNamespace>/</robotNamespace>
     </plugin>
     <plugin name='propeller_bottom_blade' filename='libLiftDragPlugin.so'>
@@ -581,7 +650,7 @@
       <air_density>1.2041</air_density>
       <forward>0 1 0</forward>
       <upward>1 0 0</upward>
-      <link_name>tanker/propeller</link_name>
+      <link_name>cessna_0/propeller</link_name>
       <robotNamespace>/</robotNamespace>
     </plugin>
     <plugin name='propeller_top_blade' filename='libLiftDragPlugin.so'>
@@ -598,7 +667,7 @@
       <air_density>1.2041</air_density>
       <forward>0 -1 0</forward>
       <upward>1 0 0</upward>
-      <link_name>tanker/propeller</link_name>
+      <link_name>cessna_0/propeller</link_name>
       <robotNamespace>/</robotNamespace>
     </plugin>
     <plugin name='right_aileron_plugin' filename='libLiftDragPlugin.so'>
@@ -615,8 +684,8 @@
       <upward>0 0 1</upward>
       <control_joint_rad_to_cl>-2.0</control_joint_rad_to_cl>
       <forward>1 0 0</forward>
-      <link_name>tanker/base_link</link_name>
-      <control_joint_name>tanker/right_aileron_joint</control_joint_name>
+      <link_name>cessna_0/base_link</link_name>
+      <control_joint_name>cessna_0/right_aileron_joint</control_joint_name>
       <robotNamespace>/</robotNamespace>
     </plugin>
     <plugin name='rudder_plugin' filename='libLiftDragPlugin.so'>
@@ -633,88 +702,8 @@
       <upward>0 1 0</upward>
       <control_joint_rad_to_cl>4.0</control_joint_rad_to_cl>
       <forward>1 0 0</forward>
-      <link_name>tanker/base_link</link_name>
-      <control_joint_name>tanker/rudder_joint</control_joint_name>
-      <robotNamespace>/</robotNamespace>
-    </plugin>
-    <plugin name='tanker_arduplane_plugin' filename='libArduPilotPlugin.so'>
-      <fdm_addr>127.0.0.1</fdm_addr>
-      <fdm_port_in>9002</fdm_port_in>
-      <fdm_port_out>9003</fdm_port_out>
-      <modelXYZToAirplaneXForwardZDown>0 0 0 0 0 0</modelXYZToAirplaneXForwardZDown>
-      <gazeboXYZToNED>0 0 0 3.141593 0 1.57079</gazeboXYZToNED>
-      <imuName>tanker/imu_link::imu_sensor</imuName>
-      <connectionTimeoutMaxCount>5</connectionTimeoutMaxCount>
-      <control channel='2'>
-        <type>VELOCITY</type>
-        <offset>0</offset>
-        <p_gain>.1</p_gain>
-        <i_gain>0</i_gain>
-        <d_gain>0</d_gain>
-        <i_max>0</i_max>
-        <i_min>0</i_min>
-        <cmd_max>2.5</cmd_max>
-        <cmd_min>0</cmd_min>
-        <jointName>tanker/propeller_joint</jointName>
-        <multiplier>838</multiplier>
-        <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
-      </control>
-      <control channel='0'>
-        <type>POSITION</type>
-        <offset>-0.5</offset>
-        <p_gain>2.00</p_gain>
-        <i_gain>0</i_gain>
-        <d_gain>1.50</d_gain>
-        <i_max>0</i_max>
-        <i_min>0</i_min>
-        <cmd_max>1.0</cmd_max>
-        <cmd_min>-1.0</cmd_min>
-        <multiplier>-1</multiplier>
-        <jointName>tanker/left_aileron_joint</jointName>
-        <controlVelocitySlowdownSim>1</controlVelocitySlowdownSim>
-      </control>
-      <control channel='0'>
-        <type>POSITION</type>
-        <offset>-0.5</offset>
-        <p_gain>2.00</p_gain>
-        <i_gain>0</i_gain>
-        <d_gain>1.50</d_gain>
-        <i_max>0</i_max>
-        <i_min>0</i_min>
-        <cmd_max>1.0</cmd_max>
-        <cmd_min>-1.0</cmd_min>
-        <multiplier>1</multiplier>
-        <jointName>tanker/right_aileron_joint</jointName>
-        <controlVelocitySlowdownSim>1</controlVelocitySlowdownSim>
-      </control>
-      <control channel='1'>
-        <type>POSITION</type>
-        <offset>-0.5</offset>
-        <p_gain>2.00</p_gain>
-        <i_gain>0</i_gain>
-        <d_gain>1.50</d_gain>
-        <i_max>0</i_max>
-        <i_min>0</i_min>
-        <cmd_max>1.0</cmd_max>
-        <cmd_min>-1.0</cmd_min>
-        <multiplier>1</multiplier>
-        <jointName>tanker/elevators_joint</jointName>
-        <controlVelocitySlowdownSim>1</controlVelocitySlowdownSim>
-      </control>
-      <control channel='3'>
-        <type>POSITION</type>
-        <offset>-0.5</offset>
-        <p_gain>2.00</p_gain>
-        <i_gain>0</i_gain>
-        <d_gain>1.50</d_gain>
-        <i_max>0</i_max>
-        <i_min>0</i_min>
-        <cmd_max>1.0</cmd_max>
-        <cmd_min>-1.0</cmd_min>
-        <multiplier>1</multiplier>
-        <jointName>tanker/rudder_joint</jointName>
-        <controlVelocitySlowdownSim>1</controlVelocitySlowdownSim>
-      </control>
+      <link_name>cessna_0/base_link</link_name>
+      <control_joint_name>cessna_0/rudder_joint</control_joint_name>
       <robotNamespace>/</robotNamespace>
     </plugin>
   </model>
