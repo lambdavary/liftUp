@@ -6,7 +6,7 @@ pointMsg = rosmessage('gazebo_msgs/ModelState');
 distance = [];
 radius = [];
 
-for i=2:0.1:20
+for i=2:0.1:30
     distance = [distance, i];
     pointMsg.ModelName = 'drogue';
     pointMsg.Pose.Position.X = i;
