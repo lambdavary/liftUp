@@ -14,3 +14,5 @@ Calistirma adimlari su sekildedir:
 - Simulink klasoru altindaki .slx uzantili dosyalar simulinkte acilir.
 - Simulink klasoru altindaki .m uzantili dosyalar calistirilir.
 - Simulink ortaminda Run tusuna basilarak simulasyon baslatilir
+
+Anlatim videosunu bu linkten izleyebilirsiniz: https://www.youtube.com/watch?v=V3rEpzk9m9k
